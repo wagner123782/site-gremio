@@ -1,0 +1,120 @@
+=====================================================
+SITE DO GRÊMIO INOVAÇÃO - EREM BENEDITA MORAES GUERRA
+GUIA RÁPIDO DO PROJETO
+=====================================================
+
+TECNOLOGIA
+----------
+- Next.js 16 (App Router, site 100% estático)
+- React 19
+- Tailwind CSS 4 (tokens customizados no globals.css)
+- TypeScript
+- Fonte: Poppins (Google Fonts, via next/font, self-hosted)
+- Sem bibliotecas externas de UI ou animação (tudo CSS puro)
+
+COMANDOS
+--------
+- npm run dev    -> roda o servidor de desenvolvimento
+- npm run build  -> build de produção
+- npm run start  -> serve o build
+- npm run lint   -> checagem de código
+
+-----------------------------------------------------
+PALETA DE CORES (definidas em app/globals.css)
+-----------------------------------------------------
+PRIMÁRIA   #001421  (azul-marinho escuro)
+  Uso: textos/títulos, fundo do bloco do CTA e do footer
+  Classes Tailwind: text-primary, bg-primary, border-primary
+
+SECUNDÁRIA #7B00FF  (roxo)
+  Uso: botões de ação, números de destaque, chips
+  Classes Tailwind: bg-secondary, text-secondary
+
+TERCIÁRIA  #00FFBB  (verde menta)
+  Uso: destaques, hovers, sublinhados de spray, brilhos
+  Classes Tailwind: bg-tertiary, text-tertiary
+
+NEUTRA     #ECFFF7  (branco esverdeado)
+  Uso: fundo geral do site e textos sobre fundo escuro
+  Classes Tailwind: bg-neutral, text-neutral
+
+EXTRA      #FFFFFF  (branco puro) - texto dos botões pintados
+
+Para trocar uma cor: altere as variáveis --brand-* em
+app/globals.css. O site inteiro atualiza junto.
+
+-----------------------------------------------------
+TIPOGRAFIA
+-----------------------------------------------------
+FONTE: Poppins (pesos carregados: 400, 700 e 900)
+
+- Títulos (h1, h2, números grandes) .... Poppins Black  (font-black)
+- Subtítulos e frases de destaque ...... Poppins Bold   (font-bold)
+- Corpo de texto e descrições .......... Poppins Regular (padrão)
+
+Aplicada automaticamente em todo o site via --font-sans
+e --font-poppins (app/layout.tsx + app/globals.css).
+
+-----------------------------------------------------
+ESTILO VISUAL / IDENTIDADE
+-----------------------------------------------------
+- Estilo jovem com pegada de GRAFITE: respingos de tinta
+  (SpraySplat), marcações de spray atrás de palavras
+  (SpraySwipe), faixas de tinta entre seções (PaintDivider)
+- Botões com borda "tremida" pintada a mão, rotação de
+  adesivo, sombra sólida verde, gota de tinta e brilho
+  no hover (classes .btn-paint-* em app/globals.css)
+- Animações: brilhos flutuando, anéis orbitais, letreiro
+  infinito (marquee), revelação ao rolar (Reveal) e
+  contagem de números. Todas respeitam prefers-reduced-motion
+- GIFs de pinguins dançando nas laterais das seções
+
+-----------------------------------------------------
+ESTRUTURA DE PASTAS
+-----------------------------------------------------
+app/
+  layout.tsx ....... fonte, metadata, lang pt-BR
+  page.tsx ......... ordem das seções da página
+  globals.css ...... cores, fonte, keyframes e classes de efeito
+
+components/
+  layout/ .......... header, footer, mascot (GIFs laterais)
+  sections/ ........ hero, about, projects, more-projects,
+                     features, call-to-action, contact
+                     (team.tsx guardado, fora do ar por enquanto)
+  ui/ .............. button, container, section-title,
+                     reveal, spray, divider, modal
+
+public/ ............. logo-gremio1.PNG e os GIFs dos pinguins
+
+-----------------------------------------------------
+COMO EDITAR COISAS COMUNS
+-----------------------------------------------------
+- Trocar um texto de seção: abra o arquivo da seção em
+  components/sections/ e edite o array/parágrafos no topo
+- Trocar cores ou fonte: app/globals.css
+- Ordem das seções: app/page.tsx
+- Links do menu: components/layout/header.tsx e footer.tsx
+
+-----------------------------------------------------
+PENDENTES / PARA DEPOIS
+-----------------------------------------------------
+1) Link real da CAIXA DE SUGESTÕES: hoje está como "#"
+   - components/sections/contact.tsx (SUGGESTION_BOX_URL)
+   - components/layout/footer.tsx   (SUGGESTION_BOX_URL)
+2) Nomes reais dos membros da chapa: components/sections/team.tsx
+   (a seção está fora do ar; para voltar, importe Team no
+   app/page.tsx e reative o link "Chapa" nos menus)
+3) Fotos dos membros: hoje os avatares usam as iniciais
+4) E-mail e Instagram já configurados:
+   gremioinovacao0@gmail.com | @gremio_inovacao.pbmg
+
+-----------------------------------------------------
+DESEMPENHO
+-----------------------------------------------------
+- Página estática, sem JavaScript de servidor por request
+- GIFs servidos direto de public/ (sem otimizador)
+- Animações só com transform/opacity (aceleração de GPU)
+- Acessibilidade: aria nos elementos interativos,
+  contraste verificado, reduced-motion respeitado
+=====================================================

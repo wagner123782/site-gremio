@@ -1,26 +1,244 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #ecfff7;
+  --foreground: #001421;
+  --brand-primary: #001421;
+  --brand-secondary: #7b00ff;
+  --brand-tertiary: #00ffbb;
+  --brand-neutral: #ecfff7;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--brand-primary);
+  --color-secondary: var(--brand-secondary);
+  --color-tertiary: var(--brand-tertiary);
+  --color-neutral: var(--brand-neutral);
+  --font-sans: var(--font-poppins);
+  --animate-hero-float: hero-float 14s ease-in-out infinite;
+  --animate-hero-float-reverse: hero-float 20s ease-in-out infinite reverse;
+  --animate-hero-orbit: hero-orbit 36s linear infinite;
+  --animate-hero-orbit-reverse: hero-orbit 52s linear infinite reverse;
+  --animate-marquee: marquee 24s linear infinite;
+  --animate-mascot-dance: mascot-dance 1.2s ease-in-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(48px, -32px, 0) scale(1.1);
+  }
+}
+
+@keyframes hero-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes mascot-dance {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(3deg);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins), Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+.hero-grid {
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 20, 33, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(0, 20, 33, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(
+    ellipse 75% 75% at 50% 35%,
+    black 25%,
+    transparent 75%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 75% 75% at 50% 35%,
+    black 25%,
+    transparent 75%
+  );
+}
+
+.btn-paint-primary,
+.btn-paint-outline {
+  position: relative;
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  transform: rotate(-1deg);
+}
+
+.btn-paint-primary {
+  background-image: linear-gradient(
+    150deg,
+    #9b3bff 0%,
+    var(--brand-secondary) 55%,
+    #59009f 100%
+  );
+  box-shadow: 4px 4px 0 0 var(--brand-tertiary),
+    inset 0 -4px 0 0 rgba(0, 0, 0, 0.28),
+    inset 0 3px 0 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-paint-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 65%
+  );
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  background-position: 120% 0;
+  transition: background-position 0.6s ease;
+}
+
+.btn-paint-primary:hover::before {
+  background-position: 0% 0;
+}
+
+.btn-paint-primary::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: calc(100% - 2px);
+  height: 16px;
+  pointer-events: none;
+  transform-origin: top;
+  transition: transform 0.25s ease;
+  background: radial-gradient(
+      7px 16px at 15% 0,
+      var(--brand-secondary) 60%,
+      transparent 62%
+    ),
+    radial-gradient(
+      5px 11px at 45% 0,
+      var(--brand-secondary) 60%,
+      transparent 62%
+    ),
+    radial-gradient(
+      6px 19px at 70% 0,
+      var(--brand-secondary) 60%,
+      transparent 62%
+    ),
+    radial-gradient(
+      4px 9px at 88% 0,
+      var(--brand-secondary) 60%,
+      transparent 62%
+    );
+}
+
+.btn-paint-primary:hover::after {
+  transform: scaleY(1.35);
+}
+
+.btn-paint-outline {
+  border-radius: 15px 225px 15px 255px / 225px 15px 255px 15px;
+  transform: rotate(1deg);
+  box-shadow: 3px 3px 0 0 rgba(0, 20, 33, 0.15);
+}
+
+.btn-paint-outline-dark {
+  border-radius: 15px 225px 15px 255px / 225px 15px 255px 15px;
+  transform: rotate(1deg);
+  box-shadow: 3px 3px 0 0 var(--brand-tertiary);
+}
+
+.btn-paint-outline-dark:hover {
+  transform: rotate(-1.5deg) scale(1.04);
+  box-shadow: 5px 5px 0 0 var(--brand-tertiary);
+}
+
+.btn-paint-outline-dark:active {
+  transform: scale(0.97);
+  box-shadow: 1px 1px 0 0 var(--brand-tertiary);
+}
+
+.btn-paint-primary:hover {
+  transform: rotate(1.5deg) scale(1.03);
+  box-shadow: 6px 6px 0 0 var(--brand-tertiary),
+    inset 0 -4px 0 0 rgba(0, 0, 0, 0.28),
+    inset 0 3px 0 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-paint-outline:hover {
+  transform: rotate(-1.5deg) scale(1.04);
+  box-shadow: 5px 5px 0 0 rgba(0, 20, 33, 0.2);
+}
+
+.btn-paint-primary:active {
+  transform: scale(0.97);
+  box-shadow: 2px 2px 0 0 var(--brand-tertiary),
+    inset 0 -2px 0 0 rgba(0, 0, 0, 0.28);
+}
+
+.btn-paint-outline:active {
+  transform: scale(0.97);
+  box-shadow: 1px 1px 0 0 rgba(0, 20, 33, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    translate: none !important;
+    transition: none !important;
+  }
+
+  .btn-paint-primary,
+  .btn-paint-outline,
+  .btn-paint-outline-dark,
+  .btn-paint-primary:hover,
+  .btn-paint-outline:hover,
+  .btn-paint-outline-dark:hover,
+  .btn-paint-primary:active,
+  .btn-paint-outline:active,
+  .btn-paint-outline-dark:active {
+    transform: none;
+  }
+
+  .animate-hero-float,
+  .animate-hero-float-reverse,
+  .animate-hero-orbit,
+  .animate-hero-orbit-reverse,
+  .animate-marquee,
+  .animate-mascot-dance {
+    animation: none;
+  }
 }
